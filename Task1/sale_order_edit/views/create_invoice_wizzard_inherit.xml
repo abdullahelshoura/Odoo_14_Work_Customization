@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inherit_view_sale_advance_payment_inv_1" model="ir.ui.view">
+        <field name="name">Invoice Orders</field>
+        <field name="model">sale.advance.payment.inv</field>
+        <field name="inherit_id" ref="sale.view_sale_advance_payment_inv"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='deposit_taxes_id']" position="after">
+                    <field name='orders' widget='one2many' attrs="{'invisible': [('count', '&lt;',2 )]}">
+                        <tree string="tree" create="false" edit="false" editable="bottom" options="{'no_open': True}" delete="false">
+
+                            <field name="order_id" readonly="1" />
+<!--                            <field name="order_id.inv_date"/>-->
+                            <field name="customer_name" readonly="1"/>
+                            <field name="invoice_date"/>
+                        </tree>
+
+                    </field>
+            </xpath>
+        </field>
+    </record>
+</odoo>
