@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <record id="inherit_view_res_partner_1" model="ir.ui.view">
+        <field name="name">Res Partner 1</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='vat']" position="after">
+                <field name="reg_no"
+                       attrs="{'invisible': [('is_company', '=', False)],'required': [('is_company','=', True)]}"/>
+                <field name="tax_file"
+                       attrs="{'invisible': [('is_company', '=', False)],'required': [('is_company','=', True)]}"/>
+                <field name="miss_code"
+                       attrs="{'invisible': [('is_company', '=', False)],'required': [('is_company','=', True)]}"/>
+                <field name="id_id"
+                       attrs="{'invisible': [('is_company', '=', True)],'required': [('is_company','!=', True)]}"/>
+                <field name="deal_type"/>
+
+            </xpath>
+
+            <xpath expr="//field[@name='category_id']" position="after">
+
+                <field name="customer_vendor" string="Type" widget="radio"/>
+
+
+            </xpath>
+            <xpath expr="//page[@name='internal_notes']" position="after">
+                <page name="customer_info" string="بيانات العميل" attrs="{'invisible': [('customer_vendor', '!=', 'customer')]}">
+                    <group>
+                        <field name="account_number"/>
+                        <field name="bank_address"/>
+                        <field name="bank_name"/>
+                        <field name="ibn_number"/>
+                        <field name="swift_number"/>
+                    </group>
+                </page>
+                <page name="vendor_info" string="بيانات المورد" attrs="{'invisible': [('customer_vendor', '!=', 'vendor')]}">
+                    <group>
+                        <field name="account_number"/>
+                        <field name="bank_address"/>
+                        <field name="bank_name"/>
+                        <field name="ibn_number"/>
+                        <field name="swift_number"/>
+                    </group>
+                </page>
+
+            </xpath>
+        </field>
+    </record>
+</odoo>
